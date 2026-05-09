@@ -13,7 +13,7 @@ Get external AI perspective from OpenAI (via Codex CLI), Google (via Gemini CLI)
 
 #### Simple Question
 ```bash
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/answer.txt "Your question here"
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/answer.txt "Your question here"
 cat /tmp/claude/answer.txt
 ```
 
@@ -38,7 +38,7 @@ cat > /tmp/claude/schema.json << 'EOF'
 }
 EOF
 
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"'  --output-schema /tmp/claude/schema.json \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"'  --output-schema /tmp/claude/schema.json \
   --output-last-message /tmp/claude/result.json \
   "Analyze [topic]. Provide structured assessment."
 
@@ -115,7 +115,7 @@ cat /tmp/claude/answer.txt
 
 **Codex:**
 ```bash
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/arch.txt \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/arch.txt \
   "Review this architecture decision: [description].
    Assess: scalability, maintainability, security risks, alternatives."
 cat /tmp/claude/arch.txt
@@ -141,7 +141,7 @@ cat /tmp/claude/arch.txt
 
 **Codex:**
 ```bash
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/security.txt \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/security.txt \
   "Security review of [file/code]:
    - Input validation
    - Authentication/authorization
@@ -176,7 +176,7 @@ cat /tmp/claude/security.txt
 
 **Codex:**
 ```bash
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/review.txt \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/review.txt \
   "Review [file] for: bugs, performance issues, maintainability.
    Provide line-level recommendations."
 cat /tmp/claude/review.txt
@@ -277,13 +277,17 @@ claude --version || echo "Claude Code CLI not installed"
 - **Gemini:** Already authenticated via Google OAuth or set `GEMINI_API_KEY` env var
 - **Claude Code:** Already authenticated via `claude login` or set `ANTHROPIC_API_KEY` env var
 
+**Codex — mandatory `--skip-git-repo-check` flag:** Every `codex exec` call from this skill **must** include `--skip-git-repo-check` (and `--ask-for-approval never` for full non-interactivity). Codex defaults to refusing to run outside a Git repository as a safety check against unintended writes to unrelated files. This skill never writes via Codex — it only consumes the response from `--output-last-message` — so the check is unnecessary and would otherwise break calls when the caller's working directory happens to be outside a repo. Without these flags, calls fail with *"not inside a Git repository"* or hang on approval prompts.
+
+**Fallback when `codex exec` fails:** If a Codex call fails despite the flags above (timeout, auth issue, runtime error), delegate the request to the `codex:codex-rescue` skill / subagent. It runs Codex through the `codex-companion.mjs` helper with more robust orchestration and handles many edge cases. Use only one retry; if that also fails, switch to a different provider (Gemini or Claude Code) and note the Codex failure in the *Uncertainties* section of your final answer.
+
 ## Multi-Provider Consensus Example
 
 Get second opinions from all three providers and compare:
 
 ```bash
 # 1. Ask Codex
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/codex_opinion.txt \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/codex_opinion.txt \
   "Should we use Redis or PostgreSQL for session storage in e-commerce app?"
 
 # 2. Ask Gemini

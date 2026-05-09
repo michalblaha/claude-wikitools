@@ -62,6 +62,10 @@ claude --version || echo "Claude Code CLI není nainstalované"
 
 **Workdir:** všechny příklady níže používají `WORK=$(mktemp -d)` na začátku a pak `$WORK/...` pro mezivýstupy. Vyhne se to kolizím při paralelním běhu a uklidí to po sobě (na rozdíl od pevného `/tmp/claude/`).
 
+**Codex — povinný flag `--skip-git-repo-check`:** Při každém volání `codex exec ...` z tohoto skillu **vždy** přidej `--skip-git-repo-check`. Codex defaultně odmítne běžet mimo git repo (safety check proti nechtěným editům cizích souborů), ale v tomto skillu Codex pouze vrací odpověď do `--output-last-message` a nic nezapisuje, takže check je zbytečný a CWD při volání z Claude může být libovolné. Bez tohoto flagu volání selže s chybou *"not inside a Git repository"*.
+
+**Fallback při selhání volání Codexu:** Pokud `codex exec` přesto selže (timeout, autentizační problém, runtime error), zkus delegovat ověření na `codex:codex-rescue` skill / subagent. Ten má vlastní robustní orchestraci přes `codex-companion.mjs` helper a obejde řadu okrajových případů. Použij jen na jeden retry; pokud selže i tak, přepni na jiného providera (Gemini nebo Claude) a poznač to v sekci *Nejistoty* finální odpovědi.
+
 ---
 
 ## 3. Workflow
@@ -130,7 +134,7 @@ a přidej potřebný kontext, pokud je potřeba.
 WORK=$(mktemp -d)
 
 # Jednoduchá otázka
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-last-message "$WORK/answer.txt" \
   "Tvá otázka tady"
 cat "$WORK/answer.txt"
@@ -150,7 +154,7 @@ cat > "$WORK/schema.json" <<'EOF'
 }
 EOF
 
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-schema "$WORK/schema.json" \
   --output-last-message "$WORK/result.json" \
   "Analyzuj [téma]. Vrať strukturované zhodnocení."
@@ -158,6 +162,8 @@ cat "$WORK/result.json"
 ```
 
 **Pozn. ke schématu:** všechny objekty (i vnořené) musí mít `"additionalProperties": false` a `"required": [...]` se všemi vlastnostmi. Jinak Codex odmítne.
+
+**Pozn. k `--skip-git-repo-check`:** flag je povinný pro každé volání Codexu z tohoto skillu (viz sekce 2). Pokud volání i s ním selže, fallback je delegace na `codex:codex-rescue`.
 
 ### Gemini / Google
 
@@ -231,7 +237,7 @@ cat "$WORK/factcheck.txt"
 ```bash
 WORK=$(mktemp -d)
 
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-last-message "$WORK/dataset_review.txt" \
   "Mám dataset přiřazení X účtů osobám (CSV níže). Najdi:
    - podezřelé záznamy (false-positive matching, různé osoby stejné jméno)
@@ -262,7 +268,7 @@ cat "$WORK/arch.txt"
 
 ```bash
 WORK=$(mktemp -d)
-codex exec -m gpt-5.5 -c 'model_reasoning_effort="xhigh"' \
+codex exec --ask-for-approval never --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="xhigh"' \
   --output-last-message "$WORK/security.txt" \
   "Bezpečnostní review následujícího kódu:
 

@@ -1,0 +1,37 @@
+{
+  "name": "wiki-tools-marketplace",
+  "description": "Marketplace pro plugin wiki-tools — znalostní báze nad Claude + Obsidian.",
+  "owner": {
+    "name": "Michal Bláha",
+    "email": "michal+github@michalblaha.cz"
+  },
+  "plugins": [
+    {
+      "name": "wiki-tools",
+      "source": "./",
+      "description": "Trvalá kumulující se znalostní báze pro Claude + Obsidian. Ingest zdrojů, dotazy s citacemi, autonomní výzkum a health check vaultu.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Michal Bláha",
+        "email": "michal+github@michalblaha.cz"
+      },
+      "homepage": "https://github.com/michalblaha/claude-wiki-tools",
+      "repository": "https://github.com/michalblaha/claude-wiki-tools",
+      "license": "MIT",
+      "category": "knowledge-management",
+      "tags": [
+        "obsidian",
+        "wiki",
+        "knowledge-base",
+        "research",
+        "second-brain",
+    "memory",
+    "notetaker",
+    "vault",
+    "markdown",
+    "llm-wiki",
+    "karpathy"
+          ]
+    }
+  ]
+}

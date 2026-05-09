@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-8B5CF6)](https://code.claude.com/docs/en/discover-plugins)
 
-Společník pro znalostní bázi nad Claude + Obsidian. Průběžný „zapisovatel", který buduje a udržuje trvalou, kumulující se wiki. Každý zdroj, který přidáte, se integruje. Každá otázka, kterou položíte, čerpá ze všeho, co bylo přečteno. Znalosti se kumulují jako úroky.
+Společník pro znalostní bázi nad Claude. Průběžný „zapisovatel", který buduje a udržuje trvalou, kumulující se wiki. Každý zdroj, který přidáte, se integruje. Každá otázka, kterou položíte, čerpá ze všeho, co bylo přečteno. Znalosti se kumulují jako úroky.
 
 Postaveno na vzoru [LLM Wiki od Andreje Karpathyho](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 

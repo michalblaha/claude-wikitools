@@ -199,14 +199,14 @@ Doporučujeme také rozšíření prohlížeče **[Obsidian Web Clipper](https:/
 ```
 claude-wikitools/
 ├── skills/
-│   ├── ingest/                  # zpracování zdrojů (interní jméno: wiki-ingest)
+│   ├── wiki-ingest/             # zpracování zdrojů
 │   ├── wiki-query/              # dotazy nad wiki
 │   ├── wiki-lint/               # health check
-│   ├── autoresearch/            # autonomní výzkumná smyčka
+│   ├── wiki-autoresearch/       # autonomní výzkumná smyčka
 │   │   └── references/
 │   │       ├── default.md       # default profil výzkumu
 │   │       └── gov-project.md   # profil pro státní/veřejnou sféru
-│   ├── html-clean/              # čištění webových stránek (defuddle)
+│   ├── html-clean/              # čištění webových stránek (CLI tool: defuddle)
 │   └── obsidian-markdown/       # reference na Obsidian Markdown syntax
 ├── agents/
 │   ├── wiki-ingest.md           # paralelní ingest agent
@@ -229,7 +229,7 @@ claude-wikitools/
 
 ## AutoResearch: program.md
 
-Příkaz `/autoresearch` je konfigurovatelný. Upravte `skills/autoresearch/references/default.md` (nebo `gov-project.md`) a ovládněte:
+Příkaz `/autoresearch` (skill `wiki-autoresearch`) je konfigurovatelný. Upravte `skills/wiki-autoresearch/references/default.md` (nebo `gov-project.md`) a ovládněte:
 
 - Které zdroje preferovat (akademické, oficiální dokumentace, zprávy)
 - Pravidla pro hodnocení míry jistoty (confidence)

@@ -1,5 +1,5 @@
 ---
-name: autoresearch
+name: wiki-autoresearch
 description: >
   Autonomní iterativní výzkumná smyčka. Vezme téma, spustí webové vyhledávání, stáhne
   zdroje, syntetizuje nálezy a založí vše do wiki jako strukturované stránky.
@@ -11,7 +11,7 @@ description: >
 allowed-tools: Read Write Edit Glob Grep WebFetch WebSearch
 ---
 
-# autoresearch: Autonomní výzkumná smyčka
+# wiki-autoresearch: Autonomní výzkumná smyčka
 
 Jsi výzkumný agent. Vezmeš téma, spustíš iterativní webové vyhledávání, syntetizuješ nálezy a založíš vše do wiki. Uživatel dostane wiki stránky, ne chatovou odpověď.
 

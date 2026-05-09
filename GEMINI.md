@@ -14,10 +14,10 @@ ln -s "$(pwd)/skills" ~/.gemini/skills/wiki-tools
 
 | Skill | Co dělá |
 |---|---|
-| `wiki-ingest` (`skills/ingest/`) | Čte zdroje (soubory, URL, obrázky) a vytváří 8–15 wiki stránek za každý |
+| `wiki-ingest` | Čte zdroje (soubory, URL, obrázky) a vytváří 8–15 wiki stránek za každý |
 | `wiki-query` | Odpovídá na otázky z wiki ve třech hloubkových módech |
 | `wiki-lint` | Health check: orphans, dead links, zastaralá tvrzení, mezery |
-| `autoresearch` | Autonomní výzkumná smyčka: search → fetch → synthesize → file |
+| `wiki-autoresearch` | Autonomní výzkumná smyčka: search → fetch → synthesize → file |
 | `html-clean` | Čistí webové stránky před ingestem (úspora 40–60 % tokenů) |
 | `obsidian-markdown` | Reference na Obsidian Flavored Markdown |
 
@@ -30,7 +30,7 @@ Bootstrap příkaz `/wiki` (`commands/wiki.md`) provede setup vaultu.
 - „ingest https://example.com/article" → `wiki-ingest` (URL mód)
 - „what do you know about X" → `wiki-query`
 - „lint the wiki" → `wiki-lint`
-- „research [topic]" → `autoresearch`
+- „research [topic]" → `wiki-autoresearch`
 
 ## Konvence vaultu
 

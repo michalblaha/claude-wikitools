@@ -1,12 +1,12 @@
 ---
-name: defuddle
+name: html-clean
 description: "Odstraňuje rušivé prvky z webových stránek před ingestem do wiki. Maže reklamy, navigaci, hlavičky, patičky a boilerplate: nechává čistý čitelný markdown, který šetří 40–60 % tokenů. Triggers on: defuddle, clean this page, strip this url, fetch and clean, clean web content before ingesting, strip ads, remove clutter, clean URL content, readable markdown from URL."
 allowed-tools: Read Bash
 ---
 
-# defuddle: Čistič webových stránek
+# html-clean: Čistič webových stránek
 
-Defuddle extrahuje smysluplný obsah z webové stránky a odstraní vše ostatní: reklamy, cookie bannery, navigační lišty, související články, patičky a tlačítka pro sdílení. Co zůstane, je tělo článku jako čistý markdown.
+Tento skill používá CLI nástroj `defuddle` (npm balíček `defuddle-cli`), který extrahuje smysluplný obsah z webové stránky a odstraní vše ostatní: reklamy, cookie bannery, navigační lišty, související články, patičky a tlačítka pro sdílení. Co zůstane, je tělo článku jako čistý markdown.
 
 Použij to před libovolným URL ingestem. Je volitelné, ale silně doporučené. Snižuje spotřebu tokenů u typických webových článků o 40–60 % a produkuje čistší wiki stránky.
 
@@ -77,7 +77,7 @@ Pokud není nainstalován: použij přímo WebFetch. Obsah bude méně čistý, 
 
 ## Integrace s wiki-ingest
 
-Skill `wiki-ingest` (`skills/ingest/`) automaticky kontroluje defuddle, když je předáno URL. Před ingestem URL nemusíš defuddle spouštět ručně. Skill ho zavolá, je-li dostupný.
+Skill `wiki-ingest` automaticky kontroluje defuddle, když je předáno URL. Před ingestem URL nemusíš defuddle spouštět ručně. Skill ho zavolá, je-li dostupný.
 
 Pro ruční čištění stránky a uložení před ingestem:
 1. Spusť výše uvedený save příkaz

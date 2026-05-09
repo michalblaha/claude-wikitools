@@ -21,10 +21,10 @@ ln -s "$(pwd)/skills" ~/.opencode/skills/wiki-tools
 
 | Skill | Trigger fráze |
 |---|---|
-| `wiki-ingest` (v `skills/ingest/`) | ingest, ingest this url, ingest this image, batch ingest |
+| `wiki-ingest` | ingest, ingest this url, ingest this image, batch ingest |
 | `wiki-query` | query, what do you know about, query quick:, query deep: |
 | `wiki-lint` | lint the wiki, health check, find orphans |
-| `autoresearch` | autoresearch, autonomous research loop |
+| `wiki-autoresearch` | autoresearch, autonomous research loop |
 | `html-clean` | clean this url, defuddle |
 | `obsidian-markdown` | reference Obsidian Markdown syntaxe (wikilinks, callouts, frontmatter) |
 

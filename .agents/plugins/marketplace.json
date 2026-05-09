@@ -1,0 +1,36 @@
+{
+  "name": "michalblaha-ai-plugins",
+  "description": "AI plugins od Michala Bláhy pro Codex CLI a Claude Code: znalostní báze, cross-model review a další companion nástroje.",
+  "owner": {
+    "name": "Michal Bláha",
+    "email": "michal+ai-plugins@michalblaha.cz"
+  },
+  "plugins": [
+    {
+      "source": {
+        "path": "./plugins/wiki-tools"
+      },
+      "interface": {
+        "displayName": "wiki-tools",
+        "shortDescription": "Trvalá kumulující se znalostní báze pro Codex + Obsidian.",
+        "longDescription": "Ingest zdrojů, dotazy s citacemi, autonomní výzkum a health check vaultu podle vzoru LLM Wiki od Andreje Karpathyho. Wiki se s každým zpracovaným zdrojem obohacuje. Companion plugin ai-review přidává cross-check.",
+        "developerName": "Michal Bláha",
+        "category": "Productivity",
+        "websiteURL": "https://github.com/michalblaha/michalblaha-ai-plugins"
+      }
+    },
+    {
+      "source": {
+        "path": "./plugins/ai-review"
+      },
+      "interface": {
+        "displayName": "ai-review",
+        "shortDescription": "Nezávislé AI review napříč Codex, Gemini a Claude Code.",
+        "longDescription": "Skills pro získání druhého názoru (second-opinion) a fact-check (double-cross-check) od jiného AI providera. Použij pro validaci architektonických rozhodnutí, kontrolu bezpečnosti kódu, ověřování faktografie nebo multi-model konsenzus u rozhodnutí s vyššími stakes.",
+        "developerName": "Michal Bláha",
+        "category": "Productivity",
+        "websiteURL": "https://github.com/michalblaha/michalblaha-ai-plugins"
+      }
+    }
+  ]
+}

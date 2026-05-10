@@ -13,7 +13,7 @@ Get external AI perspective from OpenAI (via Codex CLI), Google (via Gemini CLI)
 
 #### Simple Question
 ```bash
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/answer.txt "Your question here"
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/answer.txt "Your question here"
 cat /tmp/claude/answer.txt
 ```
 
@@ -38,7 +38,7 @@ cat > /tmp/claude/schema.json << 'EOF'
 }
 EOF
 
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"'  --output-schema /tmp/claude/schema.json \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"'  --output-schema /tmp/claude/schema.json \
   --output-last-message /tmp/claude/result.json \
   "Analyze [topic]. Provide structured assessment."
 
@@ -115,7 +115,7 @@ cat /tmp/claude/answer.txt
 
 **Codex:**
 ```bash
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/arch.txt \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/arch.txt \
   "Review this architecture decision: [description].
    Assess: scalability, maintainability, security risks, alternatives."
 cat /tmp/claude/arch.txt
@@ -141,7 +141,7 @@ cat /tmp/claude/arch.txt
 
 **Codex:**
 ```bash
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/security.txt \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/security.txt \
   "Security review of [file/code]:
    - Input validation
    - Authentication/authorization
@@ -176,7 +176,7 @@ cat /tmp/claude/security.txt
 
 **Codex:**
 ```bash
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/review.txt \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/review.txt \
   "Review [file] for: bugs, performance issues, maintainability.
    Provide line-level recommendations."
 cat /tmp/claude/review.txt
@@ -287,7 +287,7 @@ Get second opinions from all three providers and compare:
 
 ```bash
 # 1. Ask Codex
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/codex_opinion.txt \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' --output-last-message /tmp/claude/codex_opinion.txt \
   "Should we use Redis or PostgreSQL for session storage in e-commerce app?"
 
 # 2. Ask Gemini

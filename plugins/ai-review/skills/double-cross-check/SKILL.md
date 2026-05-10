@@ -134,7 +134,7 @@ a přidej potřebný kontext, pokud je potřeba.
 WORK=$(mktemp -d)
 
 # Jednoduchá otázka
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-last-message "$WORK/answer.txt" \
   "Tvá otázka tady"
 cat "$WORK/answer.txt"
@@ -154,7 +154,7 @@ cat > "$WORK/schema.json" <<'EOF'
 }
 EOF
 
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-schema "$WORK/schema.json" \
   --output-last-message "$WORK/result.json" \
   "Analyzuj [téma]. Vrať strukturované zhodnocení."
@@ -237,7 +237,7 @@ cat "$WORK/factcheck.txt"
 ```bash
 WORK=$(mktemp -d)
 
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="high"' \
   --output-last-message "$WORK/dataset_review.txt" \
   "Mám dataset přiřazení X účtů osobám (CSV níže). Najdi:
    - podezřelé záznamy (false-positive matching, různé osoby stejné jméno)
@@ -268,7 +268,7 @@ cat "$WORK/arch.txt"
 
 ```bash
 WORK=$(mktemp -d)
-codex --a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="xhigh"' \
+codex -a never exec --skip-git-repo-check -m gpt-5.5 -c 'model_reasoning_effort="xhigh"' \
   --output-last-message "$WORK/security.txt" \
   "Bezpečnostní review následujícího kódu:
 

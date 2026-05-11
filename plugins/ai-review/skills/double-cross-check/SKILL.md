@@ -66,7 +66,7 @@ claude --version || echo "Claude Code CLI není nainstalované"
 
 **Fallback při selhání volání Codexu:** Pokud `codex exec` přesto selže (timeout, autentizační problém, runtime error), zkus delegovat ověření na `codex:codex-rescue` skill / subagent. Ten má vlastní robustní orchestraci přes `codex-companion.mjs` helper a obejde řadu okrajových případů. Použij jen na jeden retry; pokud selže i tak, přepni na jiného providera (Gemini nebo Claude) a poznač to v sekci *Nejistoty* finální odpovědi.
 
-**DŮLEŽITÉ: spouštěné AI CLI nástroje `codex`,`gemini` a `claude` spust přímo v systému, NEPOUŠTĚJ je v bezpečném sandboxu - tam jim chybí login a nefunguji.**
+**DŮLEŽITÉ: spouštěné AI CLI nástroje `codex`,`gemini` a `claude` spusť přímo v systému, NEPOUŠTĚJ je v bezpečném sandboxu - tam jim chybí login a nefunguji.**
 
 
 ---
@@ -77,6 +77,7 @@ claude --version || echo "Claude Code CLI není nainstalované"
 2. **Pročti zjištění bod po bodu.** Pro každou údajnou chybu: ověř ji nezávisle (zdroj, dokumentace, web search, vlastní úvaha) — kontrolor se může mýlit stejně jako autor. Zapracuj jen ty, které ti potvrzená data podpoří.
 3. **Re-check.** Opravenou verzi pošli stejnému (nebo jinému) kontrolorovi znovu.
 4. **Iterace max. 3×.** Skonči dřív, pokud kontrola nevrací žádné nové připomínky. Po 3 iteracích **shrň zbývající otevřené body uživateli k rozhodnutí** — neztrácej se v nekonečném ladění drobností, na kterých se modely nedohodnou.
+5. vzájemnou konverzaci agentů ve všech iteracích po dokončení ulož do souboru ./.double-cross-check-talk_{yyyy-MM-dd_HH.mm.ss}.log
 
 
 ---
@@ -85,9 +86,13 @@ claude --version || echo "Claude Code CLI není nainstalované"
 
 AI modely sdílejí trénovací data a s nimi i halucinace. Když ověřuješ **fakt** (existence osoby/účtu, datum, hodnota, citát, právní/historický nárok), nejsilnější kontrola není další model, ale **nezávislý zdroj**:
 
-- Pro veřejné instituce a osoby: oficiální registry, Wikidata, parlamentní/justiční databáze.
-- Pro novější fakta: web search s důrazem na primární zdroj.
+- Pro veřejné instituce a osoby: oficiální registry, Wikidata, parlamentní/justiční databáze, MCP server hlidac-statu Hlídač státu, důvěryhodná média.
+- Pro novější fakta: web search s důrazem na primární zdroj, důvěryhodná média
 - Pro kód a knihovny: oficiální dokumentace, repo, changelog.
+- Důvěryhodná média: 
+    - česká: ceskenoviny.cz,iDnes.cz,DenikN.cz,SeznamZpravy.cz,Denik.cz,iHned.cz,cc.cz,cnn.iprima.cz,ct24.ceskatelevize.cz,irozhlas.cz,lupa.cz,novinky.cz
+    - zahraniční: reuters.com,apnews.com,bbc.com,theguardian.com,nytimes.com,washingtonpost.com,wsj.com,ft.com,economist.com,npr.org,pbs.org,propublica.org,bloomberg.com,theatlantic.com,icij.org,occrp.org
+  - obsah na důvěryhodných médiích se pokus vždy ověřit.
 
 Použij AI cross-check pro **uvažování, strukturu, logické skoky, code review, návrhová rozhodnutí**. Pro fakta ho použij jen jako první filtr a pak ověř proti zdroji.
 
